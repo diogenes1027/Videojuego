@@ -1,9 +1,5 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/CameraMovement.unity
-=======
 - path: Assets/Scenes/Attack-Interact.unity
->>>>>>> Attack-interact
   isLoaded: 1
   isActive: 1
   isSubScene: 0

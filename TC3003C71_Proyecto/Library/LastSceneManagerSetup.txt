@@ -1,5 +1,9 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/Attack-Interact.unity
+=======
+- path: Assets/Scenes/Movimiento.unity
+>>>>>>> Testing
   isLoaded: 1
   isActive: 1
   isSubScene: 0

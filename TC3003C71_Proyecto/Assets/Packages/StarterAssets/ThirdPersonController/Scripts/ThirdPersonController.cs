@@ -55,6 +55,8 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
+        public WeaponController wc;
+
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -107,8 +109,7 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
-
-            
+            Attack();
         }
 
         private void LateUpdate()
@@ -235,6 +236,13 @@ namespace StarterAssets
             return Mathf.Clamp(lfAngle, lfMin, lfMax);
         }
 
+
+        private void Attack(){
+            if(_input.attack){
+                wc.SwordAttack();
+                _input.attack = false;
+            }
+        }
         
     }
 }

@@ -22,4 +22,10 @@ public class Zone : MonoBehaviour
     {
         count++;
     }
+
+    void OnCollisionExit(Collision other)
+    {
+        count--;
+    }
+
 }

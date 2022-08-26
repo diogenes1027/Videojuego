@@ -99,6 +99,7 @@ namespace StarterAssets
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
             _playerInput = GetComponent<PlayerInput>();
+            
         }
 
         private void Update()
@@ -106,6 +107,8 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+
+            
         }
 
         private void LateUpdate()

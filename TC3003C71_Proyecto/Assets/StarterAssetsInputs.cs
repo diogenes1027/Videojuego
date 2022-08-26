@@ -11,6 +11,7 @@ namespace StarterAssets
 		public Vector2 move;
 		public Vector2 look;
 		public bool jump;
+		public bool attack;
 		
 
 		[Header("Mouse Cursor Settings")]
@@ -22,6 +23,7 @@ namespace StarterAssets
 		{
 			MoveInput(value.Get<Vector2>());
 		}
+		
 
 		public void OnLook(InputValue value)
 		{
@@ -34,6 +36,10 @@ namespace StarterAssets
 		public void OnJump(InputValue value)
 		{
 			JumpInput(value.isPressed);
+		}
+		public void OnAttack(InputValue value)
+		{
+			AttackInput(value.isPressed);
 		}
 
 		public void MoveInput(Vector2 newMoveDirection)
@@ -49,6 +55,10 @@ namespace StarterAssets
 		public void JumpInput(bool newJumpState)
 		{
 			jump = newJumpState;
+		}
+		public void AttackInput(bool newAttackState)
+		{
+			attack = newAttackState;
 		}
 
 		private void OnApplicationFocus(bool hasFocus)

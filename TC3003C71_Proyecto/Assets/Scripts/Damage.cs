@@ -6,7 +6,8 @@ using UnityEngine;
 public class Damage : MonoBehaviour
 {
     public int life = 100;
-    public int damage = 55;
+    public int damage = 25;
+    public bool canGetDamage = true;
     
     // Update is called once per frame
     void Update()
@@ -27,9 +28,18 @@ public class Damage : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
 
-        if (other.tag == "Weapon")
+        if (other.tag == "Weapon" && gameObject.tag != "Player")
         {
             getDamage(damage);
+        }
+    }
+
+    void OnTriggerStay(Collider other){
+        if (other.tag == "Tower" && canGetDamage)
+        {
+            canGetDamage = false;
+            getDamage(damage);
+            StartCoroutine(ResetDamage());
         }
     }
 
@@ -44,5 +54,10 @@ public class Damage : MonoBehaviour
         // rend.material.SetColor("_Color", c);
         
 
+    }
+    
+    IEnumerator ResetDamage(){
+        yield return new WaitForSeconds(5.0f);
+        canGetDamage = true;
     }
 }

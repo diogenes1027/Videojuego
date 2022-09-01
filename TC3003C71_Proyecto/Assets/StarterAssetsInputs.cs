@@ -18,14 +18,17 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
+		public bool Item { get; set; }
+		public bool Farm { get; set; }
+
 
 		public void OnMove(InputValue value)
 		{
-			MoveInput(value.Get<Vector2>());
+				MoveInput(value.Get<Vector2>());
 		}
-		
 
-		public void OnLook(InputValue value)
+		
+        public void OnLook(InputValue value)
 		{
 			if(cursorInputForLook)
 			{

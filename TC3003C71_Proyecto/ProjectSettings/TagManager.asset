@@ -7,8 +7,6 @@ TagManager:
   - Enemy
   - Tree
   - CinemachineTarget
-  - Weapon
-  - Tower
   layers:
   - Default
   - TransparentFX
@@ -18,8 +16,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Item
+  - Player
   - 
   - 
   - 

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Collections;
+using System.Collections;
 
 namespace StarterAssets
 {
@@ -10,6 +12,8 @@ namespace StarterAssets
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
+
+        public float Speed_ { get; set; }
 
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
@@ -52,11 +56,6 @@ namespace StarterAssets
         [Tooltip("Additional degress to override the camera. Useful for fine tuning camera position when locked")]
         public float CameraAngleOverride = 0.0f;
 
-        [Tooltip("For locking the camera position on all axis")]
-        public bool LockCameraPosition = false;
-
-        public WeaponController wc;
-
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -72,17 +71,13 @@ namespace StarterAssets
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
+        
+        
 
-        private const float _threshold = 0.01f;
+        private Vector3 inputDirection;
 
-
-        private bool IsCurrentDeviceMouse
-        {
-            get
-            {
-                return _playerInput.currentControlScheme == "KeyboardMouse";
-            }
-        }
+        
+        private float targetSpeed;
 
 
         private void Awake()
@@ -101,7 +96,10 @@ namespace StarterAssets
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
             _playerInput = GetComponent<PlayerInput>();
-            
+
+            Speed_ = 0f;
+            targetSpeed = 2;
+            _input.Farm=true;
         }
 
         private void Update()
@@ -109,7 +107,6 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
-            Attack();
         }
 
         private void LateUpdate()
@@ -128,15 +125,6 @@ namespace StarterAssets
 
         private void CameraRotation()
         {
-            // if there is an input and camera position is not fixed
-            if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
-            {
-                //Don't multiply mouse input by Time.deltaTime;
-                float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
-
-                _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
-                _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
-            }
 
             // clamp our rotations so our values are limited 360 degrees
             _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
@@ -150,8 +138,18 @@ namespace StarterAssets
         private void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = MoveSpeed;
 
+            //float targetSpeed = MoveSpeed * Speed_;
+            
+            
+            if (targetSpeed <= MoveSpeed+Speed_)
+            {
+                targetSpeed += 1;
+            }
+            else if (targetSpeed > MoveSpeed+ Speed_)
+            {
+                targetSpeed = MoveSpeed;
+            }
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
             // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
@@ -162,27 +160,37 @@ namespace StarterAssets
             float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
             float speedOffset = 0.1f;
-            float inputMagnitude =  _input.move.magnitude ;
+            float inputMagnitude =  _input.move.magnitude;
+            
+
+            
+
 
             // accelerate or decelerate to target speed
-            if (currentHorizontalSpeed < targetSpeed - speedOffset ||
-                currentHorizontalSpeed > targetSpeed + speedOffset)
+            if (currentHorizontalSpeed   < targetSpeed - speedOffset ||
+                currentHorizontalSpeed   > targetSpeed + speedOffset)
             {
+                
                 // creates curved result rather than a linear one giving a more organic speed change
                 // note T in Lerp is clamped, so we don't need to clamp our speed
                 _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
                     Time.deltaTime * SpeedChangeRate);
-
+                
                 // round speed to 3 decimal places
-                _speed = Mathf.Round(_speed * 1000f) / 1000f;
+                _speed = Mathf.Round(_speed * 1000f) / 1000f; 
+                
+
             }
             else
             {
                 _speed = targetSpeed;
             }
-
+            
             // normalise input direction
-            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+
+            inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+            
+            
 
             // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is a move input rotate player when the player is moving
@@ -208,6 +216,7 @@ namespace StarterAssets
         {
             if (Grounded)
             {
+                //MoveSpeed = 13.5f;
                 // stop our velocity dropping infinitely when grounded
                 if (_verticalVelocity < 0.0f)
                 {
@@ -220,7 +229,7 @@ namespace StarterAssets
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
                 }
             }
-            else _input.jump = false;
+            else  _input.jump = false; //MoveSpeed = 5f; }
 
             // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
             if (_verticalVelocity < _terminalVelocity)
@@ -236,13 +245,13 @@ namespace StarterAssets
             return Mathf.Clamp(lfAngle, lfMin, lfMax);
         }
 
-
-        private void Attack(){
-            if(_input.attack){
-                wc.SwordAttack();
-                _input.attack = false;
-            }
+        public void ItemB(bool val)
+        {
+            _input.Item = val;
         }
-        
+        public void FarmB(bool val)
+        {
+            _input.Farm = val;
+        }
     }
 }

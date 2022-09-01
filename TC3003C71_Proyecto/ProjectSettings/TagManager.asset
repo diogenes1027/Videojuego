@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Tree
+  - CinemachineTarget
+  - Weapon
   layers:
   - Default
   - TransparentFX

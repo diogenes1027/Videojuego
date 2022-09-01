@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CollisionDetection : MonoBehaviour
 {
-    public WeaponController wc;
+    [SerializeField] WeaponController wc;
 
     void OnTriggerEnter(Collider other)
     {

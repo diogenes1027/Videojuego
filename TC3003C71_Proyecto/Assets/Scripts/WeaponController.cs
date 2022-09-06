@@ -8,12 +8,18 @@ public class WeaponController : MonoBehaviour
     [SerializeField] bool canAttack = true;
     [SerializeField] float attackCooldown = 1.0f;
     public bool isAttacking = false;
+    private StarterAssets.StarterAssetsInputs _input;
 
 
     // Update is called once per frame
+
+    private void Start()
+    {
+        _input = GetComponent<StarterAssets.StarterAssetsInputs>();
+    }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0) && canAttack) 
+        if(_input.attack && canAttack) 
         {
             SwordAttack();
         }

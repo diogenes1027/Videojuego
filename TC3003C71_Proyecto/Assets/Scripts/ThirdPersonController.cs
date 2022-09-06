@@ -60,6 +60,11 @@ namespace StarterAssets
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
 
+        // audio
+
+        [SerializeField] private GameObject amO;
+        private AudioManager am;
+
         // player
         private float _speed;
         private float _targetRotation = 0.0f;
@@ -71,6 +76,7 @@ namespace StarterAssets
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
+        
         
         
 
@@ -87,6 +93,10 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
+            if (am==null)
+            {
+                amO = GameObject.FindGameObjectWithTag("AudioManager");
+            }
         }
 
         private void Start()
@@ -96,6 +106,9 @@ namespace StarterAssets
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
             _playerInput = GetComponent<PlayerInput>();
+
+            //am = amO.GetComponent<AudioManager>();
+            
 
             Speed_ = 0f;
             targetSpeed = 2;
@@ -107,6 +120,7 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            
         }
 
         private void LateUpdate()
@@ -227,6 +241,7 @@ namespace StarterAssets
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+                    //am.AudioSelectPlayer(1);
                 }
             }
             else  _input.jump = false; //MoveSpeed = 5f; }
@@ -245,6 +260,11 @@ namespace StarterAssets
             return Mathf.Clamp(lfAngle, lfMin, lfMax);
         }
 
+
+        private void RecieveDamage()
+        {
+            am.AudioSelectPlayer(0);
+        }
         public void ItemB(bool val)
         {
             _input.Item = val;
@@ -253,5 +273,6 @@ namespace StarterAssets
         {
             _input.Farm = val;
         }
+
     }
 }

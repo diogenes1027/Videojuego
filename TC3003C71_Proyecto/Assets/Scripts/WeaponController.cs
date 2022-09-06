@@ -29,7 +29,6 @@ public class WeaponController : MonoBehaviour
     public void SwordAttack(){
         isAttacking = true;
         canAttack = false;
-
         Animator _animator = espada.GetComponent<Animator>();
         _animator.SetTrigger("Attack");
         StartCoroutine(AttackCooldown());

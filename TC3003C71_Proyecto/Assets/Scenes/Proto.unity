@@ -250,7 +250,7 @@ PrefabInstance:
     - target: {fileID: 6582273225685178171, guid: bd073344f3f431a4fb9f02180daf6e50,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.2
+      value: 9.53
       objectReference: {fileID: 0}
     - target: {fileID: 6582273225685178171, guid: bd073344f3f431a4fb9f02180daf6e50,
         type: 3}
@@ -1493,9 +1493,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b2688127f2a48d49876e03eb9fe276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 100
-  damage: 55
-  canGetDamage: 1
 --- !u!1 &1262781073
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tesselation : MonoBehaviour
 {
 	public Material newMaterialRef;
+	public float size = 20f;
 
 	struct Shape
 	{
@@ -123,7 +124,7 @@ public class Tesselation : MonoBehaviour
 		myMesh.RecalculateNormals();
 
 		Vector3 newScale = transform.localScale;
-		newScale *= 20f;
+		newScale *= size;
 		transform.localScale = newScale; 
 
 		MeshRenderer mr = gameObject.AddComponent<MeshRenderer>();

@@ -7,8 +7,6 @@ TagManager:
   - Enemy
   - Tree
   - CinemachineTarget
-  - Tower
-  - AudioManager
   layers:
   - Default
   - TransparentFX

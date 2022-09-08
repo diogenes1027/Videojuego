@@ -93,10 +93,10 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
-            if (am==null)
+            /*if (am==null)
             {
                 amO = GameObject.FindGameObjectWithTag("AudioManager");
-            }
+            }*/
         }
 
         private void Start()

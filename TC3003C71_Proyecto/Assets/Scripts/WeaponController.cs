@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField] GameObject espada;
     [SerializeField] bool canAttack = true;
     [SerializeField] float attackCooldown = 1.0f;
     public bool isAttacking = false;
     private StarterAssets.StarterAssetsInputs _input;
+    public Vector2 moveOld;
+    Animator _animator;
+    public Damage dmg;
+    public bool alive = true;
+
 
 
     // Update is called once per frame
@@ -16,12 +20,33 @@ public class WeaponController : MonoBehaviour
     private void Start()
     {
         _input = GetComponent<StarterAssets.StarterAssetsInputs>();
+        _animator = gameObject.GetComponent<Animator>();
+        moveOld = _input.move;
+        dmg = gameObject.GetComponent<Damage>();
     }
     void Update()
     {
-        if(_input.attack && canAttack) 
-        {
-            SwordAttack();
+        if(alive){
+            if(_input.attack && canAttack) 
+            {
+                SwordAttack();
+            }
+            else if(moveOld != _input.move)
+            {
+                _animator.SetBool("Move", true);
+            }
+            else if(_input.jump){
+                _animator.SetTrigger("Jump");
+            }
+            else
+            {
+                _animator.SetBool("Move", false);
+            }
+
+            if(dmg.life <= 0){
+                alive = false;
+                _animator.SetTrigger("Dead");
+            }
         }
         
     }
@@ -29,7 +54,6 @@ public class WeaponController : MonoBehaviour
     public void SwordAttack(){
         isAttacking = true;
         canAttack = false;
-        Animator _animator = espada.GetComponent<Animator>();
         _animator.SetTrigger("Attack");
         StartCoroutine(AttackCooldown());
     }

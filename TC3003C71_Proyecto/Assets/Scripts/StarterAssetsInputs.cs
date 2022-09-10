@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -62,6 +63,7 @@ namespace StarterAssets
 		public void AttackInput(bool newAttackState)
 		{
 			attack = newAttackState;
+			StartCoroutine(ResetAttack());
 		}
 
 		private void OnApplicationFocus(bool hasFocus)
@@ -73,6 +75,11 @@ namespace StarterAssets
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}
+
+		IEnumerator ResetAttack(){
+        	yield return new WaitForSeconds(1.0f);
+        	attack = false;
+    	}
 	}
 	
 }

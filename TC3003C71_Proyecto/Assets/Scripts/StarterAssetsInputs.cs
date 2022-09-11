@@ -1,6 +1,7 @@
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
+using System.Collections;
 #endif
 
 namespace StarterAssets
@@ -8,11 +9,13 @@ namespace StarterAssets
 	public class StarterAssetsInputs : MonoBehaviour
 	{
 		[Header("Character Input Values")]
+
 		public Vector2 move;
 		public Vector2 look;
 		public bool jump;
 		public bool attack;
-		
+		private bool canAttack = true;
+		private WeaponController wpc;
 
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
@@ -20,9 +23,12 @@ namespace StarterAssets
 
 		public bool Item { get; set; }
 		public bool Farm { get; set; }
+        private void Start()
+        {
+			wpc = GetComponent<WeaponController>();
+        }
 
-
-		public void OnMove(InputValue value)
+        public void OnMove(InputValue value)
 		{
 				MoveInput(value.Get<Vector2>());
 		}
@@ -61,7 +67,16 @@ namespace StarterAssets
 		}
 		public void AttackInput(bool newAttackState)
 		{
-			attack = newAttackState;
+			bool cd = Cooldown();
+			
+            if (newAttackState && cd)
+            {
+				attack = newAttackState;
+				wpc.SwordAttack();
+			}
+			attack = false;
+            
+			
 		}
 
 		private void OnApplicationFocus(bool hasFocus)
@@ -72,6 +87,26 @@ namespace StarterAssets
 		private void SetCursorState(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+		}
+		private bool Cooldown()
+        {
+			
+			if (canAttack)
+            {
+				StartCoroutine(CooldownTime());
+				return true;
+            }
+            
+			return false;
+            
+			
+        }
+		private IEnumerator CooldownTime()
+        {
+			canAttack = false;
+			yield return new WaitForSeconds(5);
+			canAttack = true;
+
 		}
 	}
 	

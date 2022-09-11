@@ -107,7 +107,7 @@ namespace StarterAssets
             _input = GetComponent<StarterAssetsInputs>();
             _playerInput = GetComponent<PlayerInput>();
 
-            //am = amO.GetComponent<AudioManager>();
+            am = amO.GetComponent<AudioManager>();
             
 
             Speed_ = 0f;
@@ -241,7 +241,7 @@ namespace StarterAssets
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-                    //am.AudioSelectPlayer(1);
+                    am.AudioSelectPlayer(1);
                 }
             }
             else  _input.jump = false; //MoveSpeed = 5f; }
@@ -273,6 +273,7 @@ namespace StarterAssets
         {
             _input.Farm = val;
         }
+
 
     }
 }

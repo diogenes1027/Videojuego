@@ -17,18 +17,18 @@ public class WeaponController : MonoBehaviour
     {
         _input = GetComponent<StarterAssets.StarterAssetsInputs>();
     }
-    void Update()
+    /*void Update()
     {
         if(_input.attack && canAttack) 
         {
             SwordAttack();
         }
         
-    }
+    }*/
 
     public void SwordAttack(){
         isAttacking = true;
-        canAttack = false;
+        //canAttack = false;
         Animator _animator = espada.GetComponent<Animator>();
         _animator.SetTrigger("Attack");
         StartCoroutine(AttackCooldown());
@@ -37,7 +37,7 @@ public class WeaponController : MonoBehaviour
     public IEnumerator AttackCooldown(){
         StartCoroutine(ResetAttack());
         yield return new WaitForSeconds(attackCooldown);
-        canAttack = true;
+        //canAttack = true;
     }
 
     IEnumerator ResetAttack(){

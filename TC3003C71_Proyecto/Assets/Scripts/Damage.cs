@@ -28,14 +28,14 @@ public class Damage : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
 
-        if (other.tag == "Weapon" && gameObject.tag != "Player")
+        if (other.CompareTag("Weapon") && !gameObject.CompareTag( "Player"))
         {
             getDamage(damage);
         }
     }
 
     void OnTriggerStay(Collider other){
-        if (other.tag == "Tower" && canGetDamage)
+        if (other.CompareTag("Tower") && canGetDamage)
         {
             canGetDamage = false;
             getDamage(damage);

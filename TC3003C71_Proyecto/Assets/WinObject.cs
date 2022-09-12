@@ -5,13 +5,15 @@ using UnityEngine;
 public class WinObject : MonoBehaviour
 {
     Rigidbody rb;
-    public bool flag;
+    public bool flag = false;
+    AnimMovement animMovement;
     private bool winCond;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         flag = false;
+        animMovement = GetComponent<AnimMovement>();
         if (transform.name == "WinObject")
         {
             winCond = true;
@@ -21,7 +23,8 @@ public class WinObject : MonoBehaviour
     {
         if (flag)
         {
-            rb.AddForce((transform.forward + Vector3.up) * 100, ForceMode.Impulse);
+            animMovement.DisableHitObject(false);
+            animMovement.Throw();
             flag = false;
         }
     }
@@ -32,6 +35,7 @@ public class WinObject : MonoBehaviour
         if (other.CompareTag("Score"))
         {
             Destroy(gameObject);
+            Debug.Log("SCORE");
             if (winCond)
             {
                 Time.timeScale = 0;

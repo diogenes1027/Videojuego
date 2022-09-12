@@ -6,7 +6,8 @@ public class SkyTrigger : MonoBehaviour
 {
     private StarterAssets.ThirdPersonController tPC;
     private WeaponController weaponC;
-    [SerializeField]private bool flag;
+    private bool flag = true;
+    
   
 
     private void Awake()
@@ -15,31 +16,38 @@ public class SkyTrigger : MonoBehaviour
         tr = transform.parent;
         tPC = tr.GetComponent<StarterAssets.ThirdPersonController>();
         weaponC = tr.GetComponent<WeaponController>();
-        flag = true;
+        
     }
     
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.CompareTag("HitObject") && flag)
+        if (other.CompareTag("HitObject") && !weaponC.GetHit_() && flag)
         {
-            Debug.Log("skyHit");
             flag = false;
+            Debug.Log("skyHit");
+            
             Rigidbody rb = other.GetComponent<Rigidbody>();
-            rb.isKinematic = true;
+            AnimMovement animMovement = other.GetComponent<AnimMovement>();
+            animMovement.DisableHitObject(true);
+            
             
             Time.timeScale = .3f ;
             tPC.SetJumpHeight(5);
             weaponC.SetHit_(true);
+
             StartCoroutine(SlowEnd(rb));
         }
     }
     private IEnumerator SlowEnd(Rigidbody rb)
     {
         Debug.Log("slow Auto");
-        yield return new WaitForSecondsRealtime(2);
+        yield return new WaitForSecondsRealtime(5);
         Time.timeScale = 1;
-        rb.isKinematic = false;
+        if (rb)
+        {
+            rb.isKinematic = false;
+        }
         weaponC.SetHit_(false);
         tPC.SetJumpHeight(1.2f);
 

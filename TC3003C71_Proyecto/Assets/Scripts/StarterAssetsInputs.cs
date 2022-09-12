@@ -23,7 +23,7 @@ namespace StarterAssets
 		Transform childDetach;
 
 		GameObject objectHolding;
-		Rigidbody rb;
+		AnimMovement animMovement;
 
 
 
@@ -91,8 +91,8 @@ namespace StarterAssets
             else if (bAttackAction)
             {
 				childDetach.DetachChildren();
-				rb.isKinematic = false;
-				Throw(rb);
+				
+				animMovement.Throw();
 				bAttackAction = false;
 			}
 		}
@@ -116,11 +116,11 @@ namespace StarterAssets
 			{
 				
 				objectHolding = hitData.transform.gameObject;
-				rb = objectHolding.GetComponent<Rigidbody>();
-				rb.isKinematic = true;
+				animMovement = objectHolding.GetComponent<AnimMovement>();
 				Debug.Log("Cast");
 				if (objectHolding.CompareTag("HitObject") )
 				{
+					animMovement.DisableHitObject(false);
 					objectHolding.transform.SetParent(childDetach);
 					objectHolding.transform.position = transform.position + ((transform.forward+Vector3.up) * 1f);
 					bAttackAction = true;
@@ -133,12 +133,9 @@ namespace StarterAssets
 			yield return new WaitForSeconds(1.0f);
 			attack = false;
 			bCoold = true;
-			Debug.Log("Attack reset");
+			
 		}
-		private void Throw(Rigidbody rigidbody)
-		{
-			rigidbody.AddForce((transform.forward + Vector3.up) * 100, ForceMode.Impulse);
-		}
+		
 	
 	}
 	

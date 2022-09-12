@@ -21,14 +21,16 @@ public class CollisionDetection : MonoBehaviour
             other.GetComponent<Animator>().SetTrigger("Attacked");
         }*/
         
-            Debug.Log("hit");
+            
         if (other.CompareTag("HitObject") && wc.GetHit_())
         {
             Time.timeScale = 1;
 
             Debug.Log("hit2");
+            AnimMovement animMovement = other.GetComponent<AnimMovement>();
+            
             Rigidbody rb = other.GetComponent<Rigidbody>();
-            rb.isKinematic = false;
+            animMovement.DisableHitObject(false);
             rb.AddForce(score.position.normalized*50 +(Vector3.up*15f), ForceMode.VelocityChange);
             wc.SetHit_(false);
             }

@@ -13,7 +13,7 @@ public class WeaponController : MonoBehaviour
     public Damage dmg;
     public bool alive = true;
 
-
+    private bool hit_;
 
     // Update is called once per frame
 
@@ -68,4 +68,29 @@ public class WeaponController : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         isAttacking = false;
     }
+
+    public bool GetHit_()
+    {
+        return hit_;
+    }public void SetHit_(bool hit)
+    {
+        hit_= hit;
+    }/*
+    private Animator _animator;
+    private CharacterController characterController;
+
+    void Start()
+    {
+        _animator = GetComponent<Animator>();
+        characterController = GetComponent<CharacterController>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        characterController.Move(Vector3.forward * .01f);
+
+
+
+    }*/
 }

@@ -8,12 +8,25 @@ namespace StarterAssets
 {
 	public class StarterAssetsInputs : MonoBehaviour
 	{
+		[SerializeField] private LayerMask layer_;
 		[Header("Character Input Values")]
+
 		public Vector2 move;
 		public Vector2 look;
 		public bool jump;
 		public bool attack;
-		
+
+		private bool bCoold = true;
+
+		private bool bAttackAction = false;
+
+		Transform childDetach;
+
+		GameObject objectHolding;
+		Rigidbody rb;
+
+
+
 
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
@@ -23,15 +36,19 @@ namespace StarterAssets
 		public bool Farm { get; set; }
 
 
+		private void Start()
+		{
+			childDetach = transform.GetChild(3);
+		}
 		public void OnMove(InputValue value)
 		{
-				MoveInput(value.Get<Vector2>());
+			MoveInput(value.Get<Vector2>());
 		}
 
-		
-        public void OnLook(InputValue value)
+
+		public void OnLook(InputValue value)
 		{
-			if(cursorInputForLook)
+			if (cursorInputForLook)
 			{
 				LookInput(value.Get<Vector2>());
 			}
@@ -44,12 +61,13 @@ namespace StarterAssets
 		public void OnAttack(InputValue value)
 		{
 			AttackInput(value.isPressed);
+
 		}
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
-		} 
+		}
 
 		public void LookInput(Vector2 newLookDirection)
 		{
@@ -62,8 +80,21 @@ namespace StarterAssets
 		}
 		public void AttackInput(bool newAttackState)
 		{
-			attack = newAttackState;
-			StartCoroutine(ResetAttack());
+			if (bCoold && !bAttackAction)
+			{
+				attack = newAttackState;
+				bCoold = false;
+
+				AttackCast();
+				StartCoroutine(ResetAttack());
+            }
+            else if (bAttackAction)
+            {
+				childDetach.DetachChildren();
+				rb.isKinematic = false;
+				Throw(rb);
+				bAttackAction = false;
+			}
 		}
 
 		private void OnApplicationFocus(bool hasFocus)
@@ -76,10 +107,39 @@ namespace StarterAssets
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}
 
-		IEnumerator ResetAttack(){
-        	yield return new WaitForSeconds(1.0f);
-        	attack = false;
-    	}
+		private void AttackCast()
+		{
+			Ray ray = new Ray(transform.position, transform.forward);
+			RaycastHit hitData;
+
+			if (Physics.Raycast(ray, out hitData, 5, layer_))
+			{
+				
+				objectHolding = hitData.transform.gameObject;
+				rb = objectHolding.GetComponent<Rigidbody>();
+				rb.isKinematic = true;
+				Debug.Log("Cast");
+				if (objectHolding.CompareTag("HitObject") )
+				{
+					objectHolding.transform.SetParent(childDetach);
+					objectHolding.transform.position = transform.position + ((transform.forward+Vector3.up) * 1f);
+					bAttackAction = true;
+				}
+			}
+		}
+
+		IEnumerator ResetAttack()
+		{
+			yield return new WaitForSeconds(1.0f);
+			attack = false;
+			bCoold = true;
+			Debug.Log("Attack reset");
+		}
+		private void Throw(Rigidbody rigidbody)
+		{
+			rigidbody.AddForce((transform.forward + Vector3.up) * 100, ForceMode.Impulse);
+		}
+	
 	}
 	
 }

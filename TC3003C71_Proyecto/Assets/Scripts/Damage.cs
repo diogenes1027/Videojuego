@@ -8,19 +8,32 @@ public class Damage : MonoBehaviour
     public int life = 100;
     public int damage = 25;
     public bool canGetDamage = true;
-    
+    private Transform childDetach;
+
+
+    private void Awake()
+    {
+        if (transform.CompareTag("Player"))
+        {
+            childDetach = transform.GetChild(3);
+        }
+        
+    }
+   
     // Update is called once per frame
     void Update()
     {
         if (life <= 10)
         {
             Death();
+            childDetach.DetachChildren();
         }
     }
 
     public void getDamage(int damage) {
 
         life-=damage;
+        
 
     }
 

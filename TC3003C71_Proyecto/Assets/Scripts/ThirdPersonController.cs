@@ -85,6 +85,8 @@ namespace StarterAssets
         
         private float targetSpeed;
 
+        
+
 
         private void Awake()
         {
@@ -93,6 +95,7 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
+            
             /*if (am==null)
             {
                 amO = GameObject.FindGameObjectWithTag("AudioManager");
@@ -120,7 +123,9 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
-            
+            Debug.DrawRay(transform.position + Vector3.up *.3f, transform.TransformDirection(Vector3.forward ) * 5, Color.white);
+            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward-(Vector3.left/2.5f)) * 5, Color.white);
+            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward-(Vector3.right/2.5f)) * 5, Color.white);
         }
 
         private void LateUpdate()
@@ -240,8 +245,11 @@ namespace StarterAssets
                 if (_input.jump)
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
+
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+                    
                     //am.AudioSelectPlayer(1);
+                    
                 }
             }
             else  _input.jump = false; //MoveSpeed = 5f; }
@@ -260,6 +268,7 @@ namespace StarterAssets
             return Mathf.Clamp(lfAngle, lfMin, lfMax);
         }
 
+        
 
         private void RecieveDamage()
         {
@@ -274,5 +283,9 @@ namespace StarterAssets
             _input.Farm = val;
         }
 
+        public void SetJumpHeight(float jumpheight)
+        {
+            JumpHeight = jumpheight;
+        }
     }
 }

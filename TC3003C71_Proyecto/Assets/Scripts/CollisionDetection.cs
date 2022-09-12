@@ -20,7 +20,6 @@ public class CollisionDetection : MonoBehaviour
             StartCoroutine(wc.AttackCooldown());
             other.GetComponent<Animator>().SetTrigger("Attacked");
         }*/
-        
             
         if (other.CompareTag("HitObject") && wc.GetHit_())
         {
@@ -30,12 +29,10 @@ public class CollisionDetection : MonoBehaviour
             AnimMovement animMovement = other.GetComponent<AnimMovement>();
             
             Rigidbody rb = other.GetComponent<Rigidbody>();
-            animMovement.DisableHitObject(false);
+            animMovement.DisableHitObject(false, false);
             rb.AddForce(score.position.normalized*50 +(Vector3.up*15f), ForceMode.VelocityChange);
             wc.SetHit_(false);
             }
-        
-
     }
     
 }

@@ -23,8 +23,8 @@ public class WinObject : MonoBehaviour
     {
         if (flag)
         {
-            animMovement.DisableHitObject(false);
-            animMovement.Throw(Vector3.forward);
+            animMovement.DisableHitObject(false,false);
+            animMovement.Throw(Vector3.left);
             flag = false;
         }
     }

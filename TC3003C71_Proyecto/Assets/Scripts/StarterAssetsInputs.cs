@@ -20,6 +20,8 @@ namespace StarterAssets
 
 		private bool bAttackAction = false;
 
+		private bool isFull = false;
+
 		Transform childDetach;
 
 		GameObject objectHolding;
@@ -94,6 +96,7 @@ namespace StarterAssets
 				
 				animMovement.Throw(transform.forward);
 				bAttackAction = false;
+				isFull = false;
 			}
 		}
 
@@ -109,23 +112,29 @@ namespace StarterAssets
 
 		private void AttackCast()
 		{
-			Ray ray = new Ray(transform.position, transform.forward);
+			Debug.Log("Cast");
+			Ray[] rays = { new Ray(transform.position + new Vector3(0, 1, 0) * .7f, transform.forward), new Ray(transform.position + new Vector3(-1, 1, 0) * .7f, transform.forward) };
+			
 			RaycastHit hitData;
-
-			if (Physics.Raycast(ray, out hitData, 5, layer_))
-			{
-				
-				objectHolding = hitData.transform.gameObject;
-				animMovement = objectHolding.GetComponent<AnimMovement>();
-				Debug.Log("Cast");
-				if (objectHolding.CompareTag("HitObject") )
+            foreach (Ray ray in rays)
+            {
+				if (Physics.Raycast(ray, out hitData, 2, layer_))
 				{
-					animMovement.DisableHitObject(false);
-					objectHolding.transform.SetParent(childDetach);
-					objectHolding.transform.position = transform.position + ((transform.forward+Vector3.up) * 1f);
-					bAttackAction = true;
+
+					objectHolding = hitData.transform.gameObject;
+					animMovement = objectHolding.GetComponent<AnimMovement>();
+					
+					if (objectHolding.CompareTag("HitObject") && !isFull)
+					{
+						Debug.Log("GrabObject");
+						animMovement.DisableHitObject(false,false);
+						objectHolding.transform.SetParent(childDetach);
+						objectHolding.transform.position = transform.position + ((transform.forward + Vector3.up) * 1f);
+						bAttackAction = true;
+					}
 				}
 			}
+			
 		}
 
 		IEnumerator ResetAttack()

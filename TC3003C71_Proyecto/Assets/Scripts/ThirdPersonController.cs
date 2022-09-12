@@ -96,10 +96,10 @@ namespace StarterAssets
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
             
-            /*if (am==null)
+            if (am==null)
             {
                 amO = GameObject.FindGameObjectWithTag("AudioManager");
-            }*/
+            }
         }
 
         private void Start()
@@ -110,7 +110,7 @@ namespace StarterAssets
             _input = GetComponent<StarterAssetsInputs>();
             _playerInput = GetComponent<PlayerInput>();
 
-            //am = amO.GetComponent<AudioManager>();
+            am = amO.GetComponent<AudioManager>();
             
 
             Speed_ = 0f;
@@ -123,9 +123,9 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
-            Debug.DrawRay(transform.position + Vector3.up *.3f, transform.TransformDirection(Vector3.forward ) * 5, Color.white);
-            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward-(Vector3.left/2.5f)) * 5, Color.white);
-            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward-(Vector3.right/2.5f)) * 5, Color.white);
+            Debug.DrawRay(transform.position + new Vector3(0, 1, 0) * .7f, transform.TransformDirection(Vector3.forward) * 2, Color.white);
+            Debug.DrawRay(transform.position + new Vector3(1, 1, 0) * .7f, transform.TransformDirection(Vector3.forward) * 2, Color.red);
+            Debug.DrawRay(transform.position + new Vector3(-1, 1, 0) * .7f, transform.TransformDirection(Vector3.forward) * 2, Color.blue);
         }
 
         private void LateUpdate()
@@ -248,7 +248,7 @@ namespace StarterAssets
 
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
                     
-                    //am.AudioSelectPlayer(1);
+                    am.AudioSelectPlayer(1);
                     
                 }
             }
@@ -270,7 +270,7 @@ namespace StarterAssets
 
         
 
-        private void RecieveDamage()
+        public void RecieveDamage()
         {
             am.AudioSelectPlayer(0);
         }

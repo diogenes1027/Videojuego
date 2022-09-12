@@ -86,11 +86,15 @@ public class AnimMovement : MonoBehaviour
         isWandering = false;
     }
 
-    public void DisableHitObject(bool kinematic)
+    public void DisableHitObject(bool kinematic, bool fail)
     {
         _animator.enabled = false;
         animMovement.enabled = false;
         rb.isKinematic = kinematic;
+        if (fail)
+        {
+            StartCoroutine(EnableAnimAgain());
+        }
     }
     public void EnableHitObject(bool kinematic)
     {

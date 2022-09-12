@@ -12,6 +12,7 @@ TagManager:
   - Score
   - WinObject
   - HitObject
+  - AudioManager
   layers:
   - Default
   - TransparentFX

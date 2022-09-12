@@ -6,7 +6,7 @@ public class SkyTrigger : MonoBehaviour
 {
     private StarterAssets.ThirdPersonController tPC;
     private WeaponController weaponC;
-    private bool flag = true;
+    private bool flag_ = true;
     
   
 
@@ -22,31 +22,31 @@ public class SkyTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.CompareTag("HitObject") && !weaponC.GetHit_() && flag)
+        if (other.CompareTag("HitObject") && !weaponC.GetHit_() && flag_)
         {
-            flag = false;
+            flag_ = false;
             Debug.Log("skyHit");
             
             Rigidbody rb = other.GetComponent<Rigidbody>();
             AnimMovement animMovement = other.GetComponent<AnimMovement>();
-            animMovement.DisableHitObject(true);
+            animMovement.DisableHitObject(true,false);
             
             
             Time.timeScale = .3f ;
             tPC.SetJumpHeight(5);
             weaponC.SetHit_(true);
 
-            StartCoroutine(SlowEnd(rb));
+            StartCoroutine(SlowEnd(animMovement));
         }
     }
-    private IEnumerator SlowEnd(Rigidbody rb)
+    private IEnumerator SlowEnd(AnimMovement animMovement)
     {
         Debug.Log("slow Auto");
-        yield return new WaitForSecondsRealtime(5);
+        yield return new WaitForSecondsRealtime(3);
         Time.timeScale = 1;
-        if (rb)
+        if (animMovement)
         {
-            rb.isKinematic = false;
+            animMovement.DisableHitObject(false,true);
         }
         weaponC.SetHit_(false);
         tPC.SetJumpHeight(1.2f);

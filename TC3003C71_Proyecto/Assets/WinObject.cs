@@ -24,7 +24,7 @@ public class WinObject : MonoBehaviour
         if (flag)
         {
             animMovement.DisableHitObject(false);
-            animMovement.Throw();
+            animMovement.Throw(Vector3.forward);
             flag = false;
         }
     }

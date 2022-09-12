@@ -98,9 +98,9 @@ public class AnimMovement : MonoBehaviour
         animMovement.enabled = true;
         rb.isKinematic = kinematic;
     }
-    public void Throw()
+    public void Throw(Vector3 playerFront)
     {
-        rb.AddForce((transform.forward + Vector3.up) * 100, ForceMode.Impulse);
+        rb.AddForce((playerFront + Vector3.up) * 100, ForceMode.Impulse);
         StartCoroutine(EnableAnimAgain());
     }
     private IEnumerator EnableAnimAgain()

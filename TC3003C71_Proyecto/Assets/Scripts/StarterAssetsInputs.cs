@@ -92,7 +92,7 @@ namespace StarterAssets
             {
 				childDetach.DetachChildren();
 				
-				animMovement.Throw();
+				animMovement.Throw(transform.forward);
 				bAttackAction = false;
 			}
 		}

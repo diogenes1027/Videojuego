@@ -1,54 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Items : MonoBehaviour
 {
-    public Transform[] pos;
+    // Obtener collider
+    Collider _Collider;
+    // Conseguir limites de la zona
+    Vector3 _Min, _Max, _Center;
 
-    public GameObject[] objectivesSummon;
-
-
-
-    public GameObject goldenObject;
-    public GameObject farmingObject;
-    public GameObject speedObject;
-    public GameObject damageObject;
-    public GameObject shieldObject;
-
-
-
-    Collider m_Collider;
-    Vector3 m_Center;
-    Vector3 m_Size, m_Min, m_Max;
-
+    // Objeto a instanciar
+    public GameObject objectToInstantiate;
+    // Cantidad de objetos a iterar
+    public int numObj;
 
     // Start is called before the first frame update
     void Start()
     {
-        //Fetch the Collider from the GameObject
-        m_Collider = GetComponent<Collider>();
-        //Fetch the center of the Collider volume
-        m_Center = m_Collider.bounds.center;
-        //Fetch the size of the Collider volume
-        m_Size = m_Collider.bounds.size;
-        //Fetch the minimum and maximum bounds of the Collider volume
-        m_Min = m_Collider.bounds.min;
-        m_Max = m_Collider.bounds.max;
-        //Output this data into the console
-        OutputData();
+        _Collider = GetComponent<Collider>();
+        _Min = _Collider.bounds.min;
+        _Max = _Collider.bounds.max;
+        _Center = _Collider.bounds.center;
 
-        //SummonObjective();
-    }
-
-    void OutputData()
-    {
-        //Output to the console the center and size of the Collider volume
-        Debug.Log("Collider Center : " + m_Center);
-        Debug.Log("Collider Size : " + m_Size);
-        Debug.Log("Collider bound Minimum : " + m_Min);
-        Debug.Log("Collider bound Maximum : " + m_Max);
+        SummonObjects();
     }
 
     // Update is called once per frame
@@ -57,26 +31,13 @@ public class Items : MonoBehaviour
         
     }
 
-    private void SummonObjective()
+    private void SummonObjects()
     {
-        List<Transform> tmppos = pos.ToList();
-        for(int i = 0; i <3; i++)
+        for(int i = 0; i < numObj; i++)
         {
-            int k = Random.Range(0,tmppos.Count-1);
-            int n = Random.Range(0, objectivesSummon.Length);
-            Instantiate(objectivesSummon[n], tmppos[k].position, objectivesSummon[n].transform.rotation);
-            tmppos.Remove(tmppos[k]);
+            Vector3 randPos = new Vector3(Random.Range(_Min.x, _Max.x), _Center.y , Random.Range(_Min.z, _Max.z));
+            Instantiate(objectToInstantiate, _Collider.ClosestPoint(randPos), objectToInstantiate.transform.rotation);
         }
-
-    }
-
-
-    private void SummonFarm()
-    {
-        int n = Random.Range(0, objectivesSummon.Length-1);
-
-
-        Instantiate(objectivesSummon[n], pos[n].transform.position, objectivesSummon[n].transform.rotation);
 
     }
 }

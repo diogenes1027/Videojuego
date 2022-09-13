@@ -10,29 +10,31 @@ public class Damage : MonoBehaviour
     public bool canGetDamage = true;
     private Transform childDetach;
     Animator animator;
+    public Vector3 position_ = new Vector3(44.83648f, 0.4447613f, -3.45f);
 
 
     private void Awake()
     {
-        //transform.localPosition = new Vector3(10, 10, 10);
-        //transform.parent.gameObject.transform.localPosition = new Vector3(10, 10, 10);
+        
 
         animator = gameObject.GetComponent<Animator>();
-
+        
         if (transform.CompareTag("Player"))
         {
             childDetach = transform.GetChild(3);
         }
 
     }
+    
 
     // Update is called once per frame
     void Update()
     {
+        
         if (life <= 0)
         {
             Death();
-            //childDetach.DetachChildren();
+            childDetach.DetachChildren();
 
         }
         else animator.SetBool("Open", false);
@@ -80,12 +82,8 @@ public class Damage : MonoBehaviour
         {
 
             //animacion de muerte
-            //Vector3 position = new Vector3(200f, 200f, 200f);
-            //life = 100;
-            //gameObject.transform.parent.gameObject.transform.localPosition = position;
-            
-            //animator.SetTrigger("Dead");
-            Respawn();
+
+            StartCoroutine(Respawn());
         }
         else if (gameObject.CompareTag("Door") && life<= 0)
         {
@@ -107,13 +105,13 @@ public class Damage : MonoBehaviour
         canGetDamage = true;
     }
 
-    void Respawn()
+    IEnumerator Respawn()
     {
-        Debug.Log("Hola");
-;        life = 100;
-        transform.parent.gameObject.transform.localPosition = new Vector3(200, 200, 200);
-        //transform.parent.gameObject.transform.localPosition = new Vector3(200f, 200f, 200f); ;
-        //gameObject.transform.parent.gameObject.transform.localPosition = position;
-        //transform.localPosition = position;
+        life = 100;
+        animator.SetTrigger("Dead");
+        yield return new WaitForSeconds(3.0f);
+
+        transform.position= position_;
     }
+
 }

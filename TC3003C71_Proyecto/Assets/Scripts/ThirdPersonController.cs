@@ -85,6 +85,8 @@ namespace StarterAssets
         
         private float targetSpeed;
 
+        
+
 
         private void Awake()
         {
@@ -93,10 +95,11 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
-            /*if (am==null)
+            
+            if (am==null)
             {
                 amO = GameObject.FindGameObjectWithTag("AudioManager");
-            }*/
+            }
         }
 
         private void Start()
@@ -107,7 +110,7 @@ namespace StarterAssets
             _input = GetComponent<StarterAssetsInputs>();
             _playerInput = GetComponent<PlayerInput>();
 
-            //am = amO.GetComponent<AudioManager>();
+            am = amO.GetComponent<AudioManager>();
             
 
             Speed_ = 0f;
@@ -120,7 +123,9 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
-            
+            Debug.DrawRay(transform.position + new Vector3(0, 1, 0) * .7f, transform.TransformDirection(Vector3.forward) * 2, Color.white);
+            Debug.DrawRay(transform.position + new Vector3(1, 1, 0) * .7f, transform.TransformDirection(Vector3.forward) * 2, Color.red);
+            Debug.DrawRay(transform.position + new Vector3(-1, 1, 0) * .7f, transform.TransformDirection(Vector3.forward) * 2, Color.blue);
         }
 
         private void LateUpdate()
@@ -240,8 +245,11 @@ namespace StarterAssets
                 if (_input.jump)
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
+
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-                    //am.AudioSelectPlayer(1);
+                    
+                    am.AudioSelectPlayer(1);
+                    
                 }
             }
             else  _input.jump = false; //MoveSpeed = 5f; }
@@ -260,8 +268,9 @@ namespace StarterAssets
             return Mathf.Clamp(lfAngle, lfMin, lfMax);
         }
 
+        
 
-        private void RecieveDamage()
+        public void RecieveDamage()
         {
             am.AudioSelectPlayer(0);
         }
@@ -274,5 +283,9 @@ namespace StarterAssets
             _input.Farm = val;
         }
 
+        public void SetJumpHeight(float jumpheight)
+        {
+            JumpHeight = jumpheight;
+        }
     }
 }

@@ -9,6 +9,11 @@ TagManager:
   - CinemachineTarget
   - Tower
   - Weapon
+  - Score
+  - WinObject
+  - HitObject
+  - AudioManager
+  - Chicken
   layers:
   - Default
   - TransparentFX

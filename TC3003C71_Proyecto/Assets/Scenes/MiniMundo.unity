@@ -56605,6 +56605,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9380f34c10f5fe34e863c769353585c0, type: 3}
+--- !u!1 &1213926490 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5426867265123867903, guid: a03e20cad069c19458c96cb388a54a2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5914639025025699825}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1213926493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213926490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d2693bfb03394b818fea9c95de7cc5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pushLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  canPush: 0
+  strength: 0.5
+--- !u!114 &1213926496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213926490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96d6a4d424964bcc9783707681c7eae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layer_:
+    serializedVersion: 2
+    m_Bits: 0
+  move: {x: 0, y: 0}
+  look: {x: 0, y: 0}
+  jump: 0
+  attack: 0
+  chicken: {fileID: 1311290861401530, guid: 4d6a0a8aac58b4e0dab0c0a0102db4b9, type: 3}
+  cursorLocked: 1
+  cursorInputForLook: 1
 --- !u!1001 &1261947491
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -68919,7 +68964,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4977621729260970432, guid: a03e20cad069c19458c96cb388a54a2e, type: 3}
+    - {fileID: 5914639025096598774, guid: a03e20cad069c19458c96cb388a54a2e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a03e20cad069c19458c96cb388a54a2e, type: 3}
 --- !u!199 &5952022175501810485
 ParticleSystemRenderer:

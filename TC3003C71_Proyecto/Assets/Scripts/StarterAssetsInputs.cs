@@ -11,6 +11,7 @@ namespace StarterAssets
 		[SerializeField] private LayerMask layer_;
 		[Header("Character Input Values")]
 
+
 		public Vector2 move;
 		public Vector2 look;
 		public bool jump;
@@ -26,6 +27,7 @@ namespace StarterAssets
 
 		GameObject objectHolding;
 		AnimMovement animMovement;
+		[SerializeField] private GameObject chicken;
 
 
 
@@ -123,15 +125,8 @@ namespace StarterAssets
 
 					objectHolding = hitData.transform.gameObject;
 					animMovement = objectHolding.GetComponent<AnimMovement>();
+					CastDetection();
 					
-					if (objectHolding.CompareTag("HitObject") && !isFull)
-					{
-						Debug.Log("GrabObject");
-						animMovement.DisableHitObject(false,false);
-						objectHolding.transform.SetParent(childDetach);
-						objectHolding.transform.position = transform.position + ((transform.forward + Vector3.up) * 1f);
-						bAttackAction = true;
-					}
 				}
 			}
 			
@@ -142,6 +137,27 @@ namespace StarterAssets
 			yield return new WaitForSeconds(1.0f);
 			attack = false;
 			bCoold = true;
+			
+		}
+		private void CastDetection()
+        {
+            if (!isFull)
+            {
+				if (objectHolding.CompareTag("HitObject"))
+				{
+					Debug.Log("GrabObject");
+					animMovement.DisableHitObject(false, false);
+					objectHolding.transform.SetParent(childDetach);
+					objectHolding.transform.position = transform.position + ((transform.forward + Vector3.up) * 1f);
+					bAttackAction = true;
+				}
+                if (objectHolding.CompareTag("Chicken"))
+                {
+					Destroy(objectHolding);
+					Instantiate(chicken, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.rotation, transform);
+
+				}
+			}
 			
 		}
 		

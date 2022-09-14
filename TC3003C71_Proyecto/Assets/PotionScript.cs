@@ -17,7 +17,7 @@ public class PotionScript : MonoBehaviour
         {
             StarterAssets.ThirdPersonController tpc = other.GetComponent<StarterAssets.ThirdPersonController>();
 
-            StartCoroutine(tpc.CallEffectTime(gameObject, 5, 20));
+            StartCoroutine(tpc.CallEffectTime(gameObject, 5, 7));
         }
     }
 }

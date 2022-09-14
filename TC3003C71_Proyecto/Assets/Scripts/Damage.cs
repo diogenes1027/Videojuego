@@ -9,6 +9,9 @@ public class Damage : MonoBehaviour
     public int damage = 25;
     public bool canGetDamage = true;
     private Transform childDetach;
+    private StarterAssets.ThirdPersonController tpc;
+    private StarterAssets.StarterAssetsInputs sai;
+
 
 
     private void Awake()
@@ -16,6 +19,8 @@ public class Damage : MonoBehaviour
         if (transform.CompareTag("Player"))
         {
             childDetach = transform.GetChild(3);
+            tpc = GetComponent<StarterAssets.ThirdPersonController>();
+            sai = GetComponent<StarterAssets.StarterAssetsInputs>();
         }
         
     }
@@ -72,5 +77,22 @@ public class Damage : MonoBehaviour
     IEnumerator ResetDamage(){
         yield return new WaitForSeconds(5.0f);
         canGetDamage = true;
+    }
+    public IEnumerator CallEffectTimeSword(GameObject gameO, float time, int newValue)
+    {
+        if (sai.Item)
+        {
+            tpc.ItemB(false);
+            gameO.GetComponent<MeshRenderer>().enabled = false;
+            gameO.GetComponent<BoxCollider>().enabled = false;
+            damage = newValue;
+
+            yield return new WaitForSeconds(time);
+            Destroy(gameO);
+
+            damage = 25;
+            tpc.ItemB(true);
+        }
+        
     }
 }

@@ -100,10 +100,12 @@ namespace StarterAssets
             {
                 amO = GameObject.FindGameObjectWithTag("AudioManager");
             }
+            
         }
 
         private void Start()
         {
+            
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _controller = GetComponent<CharacterController>();
@@ -116,6 +118,7 @@ namespace StarterAssets
             Speed_ = 0f;
             targetSpeed = 2;
             _input.Farm=true;
+            _input.Item = true;
         }
 
         private void Update()
@@ -159,16 +162,9 @@ namespace StarterAssets
             // set target speed based on move speed, sprint speed and if sprint is pressed
 
             //float targetSpeed = MoveSpeed * Speed_;
-            
-            
-            if (targetSpeed <= MoveSpeed+Speed_)
-            {
-                targetSpeed += 1;
-            }
-            else if (targetSpeed > MoveSpeed+ Speed_)
-            {
-                targetSpeed = MoveSpeed;
-            }
+
+
+            targetSpeed = MoveSpeed + Speed_;
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
             // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
@@ -268,7 +264,23 @@ namespace StarterAssets
             return Mathf.Clamp(lfAngle, lfMin, lfMax);
         }
 
-        
+        public IEnumerator CallEffectTime(GameObject gameO,float time, float newValue)
+        {
+            if (_input.Item)
+            {
+                ItemB(false);
+                gameO.GetComponent<MeshRenderer>().enabled = false;
+                gameO.GetComponent<BoxCollider>().enabled = false;
+                Speed_ = newValue;
+
+                yield return new WaitForSeconds(time);
+                Destroy(gameO);
+                Debug.Log("pos");
+                Speed_ = 0;
+                ItemB(true);
+            }
+            
+        }
 
         public void RecieveDamage()
         {

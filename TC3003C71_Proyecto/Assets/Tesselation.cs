@@ -133,6 +133,14 @@ public class Tesselation : MonoBehaviour
 		mf.mesh = myMesh;
 
 		GetComponent<Renderer>().material = newMaterialRef;
+
+		SphereCollider sc = gameObject.AddComponent(typeof(SphereCollider)) as SphereCollider;
+		sc.isTrigger = true;
+
+		BoxCollider bc = gameObject.AddComponent(typeof(BoxCollider)) as BoxCollider;
+		bc.isTrigger = true;
+		bc.center = new Vector3(4.689408e-07f, 0.7f, 4.768372e-07f);
+		bc.size = new Vector3(1.0f, 0.1f, 1.0f);
 	}
 
 	// Update is called once per frame

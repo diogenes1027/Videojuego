@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 477428}
   - component: {fileID: 3377428}
   - component: {fileID: 2377428}
-  - component: {fileID: 7123708170781301532}
   - component: {fileID: 5726841099490775539}
+  - component: {fileID: 3721212742974345475}
+  - component: {fileID: 3148779562782942532}
   m_Layer: 0
   m_Name: sword
-  m_TagString: Untagged
+  m_TagString: Sword
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,20 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &7123708170781301532
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 177428}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: -1
-  m_Mesh: {fileID: 4300000, guid: f7d5bd2cef95125449871567fb789019, type: 3}
 --- !u!95 &5726841099490775539
 Animator:
   serializedVersion: 3
@@ -114,3 +101,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &3721212742974345475
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177428}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0068783085, y: 0.02225223, z: 0.002622805}
+  m_Center: {x: -0.000016602222, y: 0.0056427633, z: -0.000010593503}
+--- !u!114 &3148779562782942532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c9e63300c7720942b6217df4e90a74c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newValue: 0
+  valueLvl1: 0
+  valueLvl2: 0
+  valueLvl3: 0
+  effectTime: 0

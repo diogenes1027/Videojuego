@@ -139,6 +139,7 @@ namespace StarterAssets
 			bCoold = true;
 			
 		}
+		
 		private void CastDetection()
         {
             if (!isFull)

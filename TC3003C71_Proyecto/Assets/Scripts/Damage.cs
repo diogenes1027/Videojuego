@@ -7,13 +7,15 @@ public class Damage : MonoBehaviour
 {
     public int life = 100;
     public int damage = 25;
+    public int spikesdmg = 25;
+
     public bool canGetDamage = true;
     private Transform childDetach;
     private StarterAssets.ThirdPersonController tpc;
     private StarterAssets.StarterAssetsInputs sai;
 
     Animator animator;
-    public Vector3 position_ = new Vector3(44.83648f, 0.4447613f, -3.45f);
+    public Vector3 position_ = new Vector3(-44.98f, 0.4447613f, 2.42f);
 
 
 
@@ -37,7 +39,6 @@ public class Damage : MonoBehaviour
         if (life <= 0)
         {
             Death();
-            childDetach.DetachChildren();
         }
         else if (life > 0 && gameObject.CompareTag("Door")) {
             animator.SetBool("Open", false);
@@ -54,18 +55,18 @@ public class Damage : MonoBehaviour
     // Editar la funcion para analizar que le pego
     void OnTriggerEnter(Collider other)
     {
-
-        if (other.tag == "Weapon" && gameObject.tag != "Player")
+        Debug.Log(other.tag);
+        if (other.tag == "Weapon")
         {
             getDamage(damage);
         }
     }
 
     void OnTriggerStay(Collider other){
-        if (other.tag == "Tower" && canGetDamage)
+        if (other.tag == "Spikes" && canGetDamage)
         {
             canGetDamage = false;
-            getDamage(damage);
+            getDamage(spikesdmg);
             StartCoroutine(ResetDamage());
         }
     }
@@ -89,13 +90,7 @@ public class Damage : MonoBehaviour
             {
                 animator.SetBool("Open", true);
             }
-
-
         }
-        // EDITAR ESTO PARA QUE SE MUERA EL PERSONAJE
-        // Renderer rend = gameObject.GetComponent<Renderer>();
-        // rend.material.SetColor("_Color", c);
-
 
     }
     

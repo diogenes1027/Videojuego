@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5484274292488471819}
   - component: {fileID: 5484274292488471820}
+  - component: {fileID: 1423708965}
+  - component: {fileID: 1423708964}
   m_Layer: 0
   m_Name: Spikes
-  m_TagString: Untagged
+  m_TagString: Spikes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,6 +56,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &1423708965
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5484274292488471821}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.4587665, y: 5.601072, z: 7.0981965}
+  m_Center: {x: 1.6670469, y: -0.10809034, z: 1.2749738}
+--- !u!114 &1423708964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5484274292488471821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f938577cc9c504736a13e0a718193ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemigo: 
 --- !u!1001 &5484274290408457384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -126,6 +154,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -2532479225163619384, guid: b5e1c19bd7f53144281d7486662e0043,
         type: 3}
+    - target: {fileID: 64872690118006054, guid: f5e310684d533124e895f9100f7931f4,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5e310684d533124e895f9100f7931f4, type: 3}
 --- !u!4 &5484274290408678376 stripped
@@ -206,6 +239,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -2532479225163619384, guid: b5e1c19bd7f53144281d7486662e0043,
         type: 3}
+    - target: {fileID: 64872690118006054, guid: f5e310684d533124e895f9100f7931f4,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5e310684d533124e895f9100f7931f4, type: 3}
 --- !u!4 &5484274290498058295 stripped
@@ -286,6 +324,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -2532479225163619384, guid: b5e1c19bd7f53144281d7486662e0043,
         type: 3}
+    - target: {fileID: 64872690118006054, guid: f5e310684d533124e895f9100f7931f4,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5e310684d533124e895f9100f7931f4, type: 3}
 --- !u!4 &5484274290586717212 stripped
@@ -366,6 +409,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -2532479225163619384, guid: b5e1c19bd7f53144281d7486662e0043,
         type: 3}
+    - target: {fileID: 64872690118006054, guid: f5e310684d533124e895f9100f7931f4,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5e310684d533124e895f9100f7931f4, type: 3}
 --- !u!4 &5484274291443765823 stripped

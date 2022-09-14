@@ -18,6 +18,7 @@ TagManager:
   - Sword
   - Potion
   - Door
+  - Spikes
   layers:
   - Default
   - TransparentFX

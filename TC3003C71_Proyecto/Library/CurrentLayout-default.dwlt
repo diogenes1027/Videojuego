@@ -116,7 +116,7 @@ MonoBehaviour:
   m_MinSize: {x: 709, y: 492}
   m_MaxSize: {x: 18004, y: 14042}
   vertical: 0
-  controlID: 170
+  controlID: 179
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_MinSize: {x: 231, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 17
+  controlID: 66
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 342}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 104
+  controlID: 113
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_ShowContextualTools: 0
   m_WindowGUID: 4a1d6639a67304bd79adef378de95c38
   m_Gizmos: 1
-  m_SceneIsLit: 0
+  m_SceneIsLit: 1
   m_SceneLighting: 1
   m_2DMode: 0
   m_isRotationLocked: 0
@@ -506,9 +506,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.28737307, y: 0.026432078, z: -0.007914941, w: -0.95742124}
   m_Size:
-    m_Target: 12.930551
+    m_Target: 29.25531
     speed: 2
-    m_Value: 13.230551
+    m_Value: 29.25531
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -665,10 +665,10 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 951d773f311cc4dd99397a05dd453d25,
+  m_AnimatorController: {fileID: 9100000, guid: a51e24e08cdbc4bee95af80fc91a8703,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 5803916539268471784, guid: 951d773f311cc4dd99397a05dd453d25,
+  - m_Target: {fileID: -3154297610872284025, guid: a51e24e08cdbc4bee95af80fc91a8703,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -709,7 +709,7 @@ MonoBehaviour:
     height: 309
   m_ViewDataDictionary: {fileID: 0}
   m_SearchFilter:
-    m_NameFilter: 
+    m_NameFilter: pot
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -721,20 +721,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/LowpolyWeaponPack/Prefabs
+    - Assets
   m_ViewMode: 1
   m_StartGridSize: 78
   m_LastFolders:
-  - Assets/LowpolyWeaponPack/Prefabs
+  - Assets
   m_LastFoldersGridSize: 78
   m_LastProjectPath: C:\Github\Videojuego\TC3003C71_Proyecto
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 255}
-    m_SelectedIDs: ce510000
-    m_LastClickedID: 20942
-    m_ExpandedIDs: 00000000784a00007a4a00007c4a00007e4a0000804a0000824a0000844a0000864a0000884a00008a4a00008c4a00008e4a0000904a0000924a0000944a0000964a0000984a00009a4a00009c4a00009e4a0000ec4a000000ca9a3b
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: 00000000384a00003a4a00003c4a00003e4a0000404a0000424a0000444a0000464a0000484a00004a4a00004c4a00004e4a0000504a0000524a0000544a0000564a0000584a00005a4a00005c4a00005e4a000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -762,7 +762,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000784a00007a4a00007c4a00007e4a0000804a0000824a0000844a0000864a0000884a00008a4a00008c4a00008e4a0000904a0000924a0000944a0000964a0000984a00009a4a00009c4a00009e4a0000
+    m_ExpandedIDs: 00000000384a00003a4a00003c4a00003e4a0000404a0000424a0000444a0000464a0000484a00004a4a00004c4a00004e4a0000504a0000524a0000544a0000564a0000584a00005a4a00005c4a00005e4a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -846,10 +846,10 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 356}
-      m_SelectedIDs: f24200006640000008430000a83e0000984200007c3f0000
-      m_LastClickedID: 16252
-      m_ExpandedIDs: 0af5ffff16f5ffff5ef8ffff5afbffff78400000a8400000ce4000000841000078420000
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: c4f3ffff
+      m_LastClickedID: -3132
+      m_ExpandedIDs: cef3ffff3afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -962,4 +962,4 @@ MonoBehaviour:
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 578
+  m_LastVerticalScrollValue: 100

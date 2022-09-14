@@ -109,7 +109,7 @@ public class AnimMovement : MonoBehaviour
     }
     private IEnumerator EnableAnimAgain()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
         EnableHitObject(false);
     }
 

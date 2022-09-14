@@ -14,7 +14,9 @@ TagManager:
   - HitObject
   - AudioManager
   - Chicken
-  - Door
+  - ChickenMark
+  - Sword
+  - Potion
   layers:
   - Default
   - TransparentFX

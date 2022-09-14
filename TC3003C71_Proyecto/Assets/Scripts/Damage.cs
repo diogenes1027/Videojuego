@@ -127,7 +127,7 @@ public class Damage : MonoBehaviour
         animator.SetTrigger("Dead");
         yield return new WaitForSeconds(3.0f);
 
-        transform.position = position_;
+        gameObject.transform.position = position_;
     }
 
 }

@@ -17,6 +17,7 @@ TagManager:
   - ChickenMark
   - Sword
   - Potion
+  - Door
   layers:
   - Default
   - TransparentFX
